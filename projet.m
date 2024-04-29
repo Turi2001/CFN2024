@@ -29,7 +29,7 @@ b = A*x;
 xhat0 = A\b; % solution initiale
 
 nit = 20;
-rr = zeros(nit,1); eehat = zeros(nit,1);
+rr = zeros(n,nit+1); eehat = zeros(n,nit+1);
 %
 % Implémentation d'une boucle de raffinements itératifs for i=1:nit
 % et stockage des erreurs et des résidus après chaque raffinement dans rr et ee 
