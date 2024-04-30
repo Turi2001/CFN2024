@@ -35,33 +35,30 @@ rr = zeros(n,nit+1); eehat = zeros(n,nit+1);
 % et stockage des erreurs et des résidus après chaque raffinement dans rr et ee 
 % Donc:
 % <initialisations de r, ehat, xhat>
+% Initialisation des résidus et des erreurs
+rr = zeros(n, nit+1);
+eehat = zeros(n, nit+1);
+
+% Initialisation de xhat (solution initiale)
 xhat = xhat0;
-r = b - A*xhat;
-ehat = A\r;  % Calcul de ehat initial
 
+% Boucle de raffinements itératifs
 for i = 1:nit
-    % Raffinement itératif
-    [L, U] = lu(A);  % Factorisation LU de A
-    
-    % Résoudre le système linéaire pour obtenir la correction Delta x
-    delta_x = U \ (L \ r);
-    
-    % Mise à jour de xhat
-    xhat = xhat + delta_x;
-    
-    % Recalcul du résidu et de ehat
-    r = b - A*xhat;
-    ehat = A\r;
-    
-    % Stockage des résidus et erreurs
-    rr(i) = norm(r);     % Norme du résidu
-    eehat(i) = norm(ehat);  % Norme de l'erreur ehat
-end
+    % Calcul du résidu r = b - A*xhat
+    r = r - A*ehat;
 
-%for i=1:nit
-%    <raffinement itératif: nouvelles valeurs de r, ehat, xhat>
-%    rr(i) = r; eehat(i) = ehat;
-%end
+    % Calcul de l'erreur ehat = A*r
+    ehat = A\r;
+
+    % Mise à jour des résidus et des erreurs
+    rr(:, i+1) = r;    % Stocke le résidu r à l'itération i
+    eehat(:, i+1) = ehat;    % Stocke l'erreur ehat à l'itération i
+
+    % Mise à jour de xhat pour l'itération suivante
+    xhat = xhat + ehat;
+
+    % Note : xhat(i+1) est la nouvelle estimation de la solution à l'itération i+1
+end
 
 normrr = sqrt(sum(rr.^2));
 normeehat = sqrt(sum(eehat.^2));
