@@ -1,4 +1,4 @@
-matricule = 514162
+matricule = 514162;
 bulletsize = 8; bulletcolor = 'blue';
 bullet = {'o','markerfacecolor',bulletcolor,'color',bulletcolor,...
           'markersize',bulletsize};
@@ -21,7 +21,7 @@ A = U*Sigma*V';
 % reduce values of A to the interval [-1,1]
 A = A/max(max(abs(A)));
 % check that condition number is as given
-condAtest = cond(A)
+condAtest = cond(A);
 
 x = floor(10*rand(n,1));
 b = A*x;
