@@ -47,8 +47,9 @@ for i = 1:nit
     % Calcul du résidu r = b - A*xhat
     r = r - A*ehat;
 
-    % Calcul de l'erreur ehat = A*r
-    ehat = A\r;
+    % Résolution du système linéaire A*ehat = r en utilisant la factorisation LU
+    [L, U] = lu(A);
+    ehat = U \ (L \ r);
 
     % Mise à jour des résidus et des erreurs
     rr(:, i+1) = r;    % Stocke le résidu r à l'itération i
