@@ -41,7 +41,8 @@ eehat = zeros(n, nit+1);
 
 % Initialisation de xhat (solution initiale)
 xhat = xhat0;
-
+r =b;
+ehat = A\r;
 % Boucle de raffinements itératifs
 for i = 1:nit
     % Calcul du résidu r = b - A*xhat
