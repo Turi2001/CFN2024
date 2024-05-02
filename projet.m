@@ -73,9 +73,11 @@ hold on
 plot((0:nit),log10(normrr),bullet{:})
 hold off
 
+
 figure(2)
 normeehat = sqrt(sum(eehat.^2));
 plot((0:nit),log10(normeehat),'b','linewidth',3)
 hold on
 plot((0:nit),log10(normeehat),bullet{:})
 hold off
+saveas(gcf,"Erreur",'jpeg');
